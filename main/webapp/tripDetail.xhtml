@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+    <ui:composition template="./resources/template.xhtml">
+
+        <ui:define name="title">TH Holiday - Trip</ui:define>
+
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages warnClass="alert alert-danger" infoClass="alert alert-success"
+                    errorClass="alert alert-danger" errorStyle="color: #d20005" warnStyle="color: Tomato;"
+                    infoStyle="color: green; border: 1px solid LightSteelBlue; display: inline-block;" layout="list"
+                    styleClass="face_msg" />
+            </h:panelGroup>
+            <h:form>
+
+                <div class="card mb-3" style="max-width: 640px;">
+                    <div class="card-header">
+                        <h:outputText value="Trip #" />
+                        <h:outputText value="#{tripManagedBean.trip.id}" />
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <h:outputText value="Order Date: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{tripManagedBean.trip.orderDate}">
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                    </h:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Departure Date: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{tripManagedBean.trip.departureDate}">
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                    </h:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Total Amount Payable: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{tripManagedBean.trip.totalAmountPayable}">
+                                        <f:convertNumber type="currency" currencySymbol="$" />
+                                    </h:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Debt: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{tripManagedBean.trip.getDebt()}">
+                                        <f:convertNumber type="currency" currencySymbol="$" />
+                                    </h:outputText><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputText value="PaymentOverdue: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{tripManagedBean.trip.paymentOverdue}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+                        <h5 class="card-title">
+                            <h:outputText value="Passengers" />
+                        </h5>
+                        <h:dataTable class="table table-hover" value="#{tripManagedBean.passengerRows}" var="passenger">
+                            <h:column>
+                                <f:facet name="header">ID</f:facet>
+                                #{passenger.id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                #{passenger.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">First Name</f:facet>
+                                #{passenger.firstName}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Last Name</f:facet>
+                                #{passenger.lastName}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Mobile phone</f:facet>
+                                #{passenger.mobilePhone}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Email address</f:facet>
+                                #{passenger.email}
+                            </h:column>
+                            <h:column>
+                                <div class="d-grid gap-2 d-md-block">
+                                    <h:commandButton value="View"
+                                        actionListener="#{passengerManagedBean.setPassenger((tripManagedBean.tripPassenger))}"
+                                        action="passengerDetail" styleClass="row_button"
+                                        class="btn btn-secondary btn-sm me-md-2" />
+                                    <h:commandButton value="Edit"
+                                        actionListener="#{passengerManagedBean.setPassenger((tripManagedBean.tripPassenger))}"
+                                        action="passengerInput" styleClass="row_button"
+                                        class="btn btn-secondary btn-sm me-md-2" />
+                                    <h:commandButton value="Remove from trip"
+                                        actionListener="#{tripManagedBean.quitTrip}"
+                                        action="#{passengerManagedBean.quitTrip((tripManagedBean.tripPassenger))}"
+                                        styleClass="row_button" class="btn btn-secondary btn-sm" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                        <br /><br />
+                        <h5 class="card-title">
+                            <h:outputText value="Payment Record" />
+                        </h5>
+                        <h:dataTable class="table table-hover" value="#{tripManagedBean.paymentRecordRows}" var="pr">
+                            <h:column>
+                                <f:facet name="header">ID</f:facet>
+                                #{pr.id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Admount Paid</f:facet>
+                                <h:outputText value="#{pr.amountPaid}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Payment Date</f:facet>
+
+                                <h:outputText value="#{pr.paymentDate}">
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                </h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+
+                <br />
+                <h:panelGroup layout="block" rendered='#{tripManagedBean.status == "Deletion"}'>
+                    <h:commandButton value="Cancel" action="#{tripManagedBean.cancelDelete}"
+                        title="Keep and don't delete yet" class="btn btn-primary me-md-2" />
+                    <h:commandButton value="DELETE!" action="#{tripManagedBean.deleteTrip}"
+                        class="btn btn-danger me-md-2" />
+                    <br /><br />
+                </h:panelGroup>
+                <h:commandButton value="Edit Trip" action="tripInput" rendered='#{tripManagedBean.status != "Deletion"}'
+                    class="btn btn-secondary me-md-2" />
+                <h:commandButton value="Back" action="#{tripManagedBean.prepareList}"
+                    rendered='#{tripManagedBean.status != "Deletion"}' class="btn btn-secondary" />
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
+</html>

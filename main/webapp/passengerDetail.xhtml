@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<body>
+
+    <ui:composition template="./resources/template.xhtml">
+
+        <ui:define name="title">TH Holiday - Passenger</ui:define>
+
+        <ui:define name="body">
+            <h3>Passenger Detail</h3>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages warnClass="alert alert-danger" infoClass="alert alert-success"
+                    errorClass="alert alert-danger" errorStyle="color: #d20005" warnStyle="color: Tomato;"
+                    infoStyle="color: green; border: 1px solid LightSteelBlue; display: inline-block;" layout="list"
+                    styleClass="face_msg" />
+            </h:panelGroup>
+
+            <h:form>
+                <div class="card" style="width: 30rem;">
+                    <div class="card-header">
+                        Passenger #
+                        <h:outputText value="#{passengerManagedBean.passenger.id}" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <h:outputText value="#{passengerManagedBean.passenger.title}" />&nbsp;
+                            <h:outputText value="#{passengerManagedBean.passenger.firstName}" />&nbsp;
+                            <h:outputText value="#{passengerManagedBean.passenger.lastName}" />
+                        </h5>
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <h:outputText value="Mobile Phone: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{passengerManagedBean.passenger.mobilePhone}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Email: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="#{passengerManagedBean.passenger.email}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Trip: " />
+                                </td>
+                                <td>
+                                    <h:outputText value="Trip #"
+                                        rendered="#{passengerManagedBean.passenger.trip != null}" />
+                                    <h:outputText value="#{passengerManagedBean.passenger.trip.id}" />
+                                    <h:outputText value="N/A"
+                                        rendered="#{passengerManagedBean.passenger.trip == null}" />
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
+                <br /><br />
+                <div class="d-grid gap-2 d-md-block">
+                    <h:panelGroup layout="block" rendered='#{passengerManagedBean.status == "Deletion"}'>
+                        <h:commandButton value="Cancel" action="#{passengerManagedBean.cancelDelete}"
+                            title="Keep and don't delete yet" class="btn btn-primary me-md-2" />
+                        <h:commandButton value="DELETE!" action="#{passengerManagedBean.deletePassenger}"
+                            class="btn btn-danger me-md-2" />
+                        <br /><br />
+                    </h:panelGroup>
+                    <h:commandButton value="Edit" action="passengerInput" class="btn btn-secondary me-md-2" />
+
+                    <h:commandButton value="Back" action="#{passengerManagedBean.prepareList}"
+                        class="btn btn-secondary me-md-2" />
+
+                    <h:commandButton value="Add New Passenger" action="#{passengerManagedBean.prepareAdd}"
+                        class="btn btn-secondary" />
+                </div>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+    <ui:composition template="./resources/template.xhtml">
+
+        <ui:define name="title">TH Holiday - trip</ui:define>
+
+        <ui:define name="body">
+
+            <h:form>
+                <div class="mb-3">
+                    <h:outputLabel value="Departure Date:" for="departureDate" class="form-label" />
+                    <h:inputText class="form-control" id="departureDate" value="#{tripManagedBean.trip.departureDate}"
+                        converterMessage="Invalid date. Required date format: dd-MM-yyyy">
+                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                    </h:inputText>
+
+                    <h:message for="departureDate" errorStyle="font-size: 0.9em; color: OrangeRed" class="form-text" />
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel value="Total Amount Payable:" for="totalAmountPayable" class="form-label" />
+
+                    <h:inputText class="form-control" id="totalAmountPayable"
+                        value="#{tripManagedBean.trip.totalAmountPayable}">
+                        <f:convertNumber minFractionDigits="2" />
+                        <f:converter converterId="javax.faces.Double" />
+                    </h:inputText>
+
+                    <h:message for="totalAmountPayable" errorStyle="font-size: 0.9em; color: OrangeRed"
+                        class="form-text" />
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <h:outputLabel value="Payment Overdue:" for="paymentOverdue"
+                            rendered='#{tripManagedBean.status != "Addition"}' class="form-check-label" />
+
+                        <h:selectBooleanCheckbox id="paymentOverdue" value="#{tripManagedBean.trip.paymentOverdue}"
+                            rendered='#{tripManagedBean.status != "Addition"}' class="form-check-input" />
+
+                    </div>
+                    <h:message for="paymentOverdue" errorStyle="font-size: 0.9em; color: OrangeRed"
+                        rendered='#{tripManagedBean.status != "Addition"}' class="form-text" />
+                </div>
+                <br />
+                <div class="d-grid gap-2 d-md-block">
+                    <h:panelGroup layout="block" rendered="#{tripManagedBean.status == null}">
+                        <h:commandButton value="Discard Changes" action="tripInput" immediate="true"
+                            class="btn btn-primary me-md-2" />
+                    </h:panelGroup>
+                    <h:commandButton value="Save" action="#{tripManagedBean.save}" class="btn btn-success me-md-2" />
+                    <h:commandButton value="Back" action="#{tripManagedBean.prepareList}" immediate="true"
+                        class="btn btn-secondary" />
+                </div>
+
+                <br /><br />
+                <div class="messagecolor">
+                    <h:messages infoClass="alert alert-success" errorClass="alert alert-danger" showSummary="true"
+                        showDetail="false" errorStyle="color: #d20005" infoStyle="color: green" />
+                </div>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
+</html>

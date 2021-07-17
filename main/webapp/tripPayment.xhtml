@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+    <ui:composition template="./resources/template.xhtml">
+
+        <ui:define name="title">TH Holiday - Payment</ui:define>
+
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages warnClass="alert alert-danger" infoClass="alert alert-success"
+                    errorClass="alert alert-danger" errorStyle="color: #d20005" warnStyle="color: Tomato;"
+                    infoStyle="color: green; border: 1px solid LightSteelBlue; display: inline-block;" layout="list"
+                    styleClass="face_msg" />
+            </h:panelGroup>
+
+            <h:form>
+                <div class="mb-3">
+                    <h:outputLabel value="Amount:" for="amount" class="form-label" />
+                    <h:inputText class="form-control" id="amount" value="#{tripManagedBean.pr.amountPaid}">
+                        <f:convertNumber minFractionDigits="2" />
+                        <f:converter converterId="javax.faces.Double" />
+                    </h:inputText>
+                    <h:message for="amount" errorStyle="font-size: 0.9em; color: OrangeRed" class="form-text" />
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel value="Payment Date:" for="paymentDate" class="form-label" />
+                    <h:inputText class="form-control" id="paymentDate" value="#{tripManagedBean.pr.paymentDate}"
+                        converterMessage="Invalid date. Required date format: dd-MM-yyyy">
+                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                    </h:inputText>
+                    <h:message for="paymentDate" errorStyle="font-size: 0.9em; color: OrangeRed" class="form-text" />
+                </div>
+                <br />
+
+                <h:commandButton value="Pay" action="#{tripManagedBean.checkFullyPaid}"
+                    class="btn btn-success me-md-2" />
+                <h:commandButton value="Cancel" action="#{tripManagedBean.prepareList}" immediate="true"
+                    class="btn btn-secondary" />
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
+</html>

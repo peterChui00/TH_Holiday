@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>TH Holiday - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CSS -->
+    <h:outputStylesheet name="/css/default.css" />
+</h:head>
+<h:body>
+    <main>
+        <h:form>
+            <h1>Login to TH Holiday</h1>
+            <div>
+                <h:outputLabel for="loginUsername">Username: </h:outputLabel>
+                <h:inputText id="loginUsername" label="Username" required="true" requiredMessage="Username is required."
+                    validatorMessage="Wrong Username." styleClass="w-50">
+                    <f:validateRegex pattern="Admin" />
+                </h:inputText>
+            </div>
+            <div>
+                <h:outputLabel for="loginPassword">Password: </h:outputLabel>
+                <h:inputSecret id="loginPassword" label="Password" required="true"
+                    requiredMessage="Password is required." redisplay="false" validatorMessage="Wrong Password.">
+                    <f:validateRegex pattern="Admin" />
+                </h:inputSecret>
+            </div>
+
+            <h:commandButton value="login" action="#{paymentWarningBean.prepareWarning}"></h:commandButton>
+        </h:form>
+    </main>
+
+</h:body>
+
+</html>

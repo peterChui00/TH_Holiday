@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+    <ui:composition template="./resources/template.xhtml">
+
+        <ui:define name="title">TH Holiday - Passenger</ui:define>
+
+        <ui:define name="body">
+
+            <h:form>
+                <div class="mb-3">
+                    <h:outputLabel value="Title:" for="title" class="form-label" />
+                    <h:selectOneMenu id="title" value="#{passengerManagedBean.passenger.title}" class="form-select">
+                        <f:selectItem itemValue="MR" itemLabel="MR" />
+                        <f:selectItem itemValue="MRS" itemLabel="MRS" />
+                        <f:selectItem itemValue="MS" itemLabel="MS" />
+                        <f:selectItem itemValue="MSTR" itemLabel="MSTR" />
+                        <f:selectItem itemValue="MISS" itemLabel="MISS" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel value="First Name:" for="firstName" class="form-label" />
+                    <h:inputText class="form-control" id="firstName"
+                        value="#{passengerManagedBean.passenger.firstName}" />
+                    <h:message class="form-text" for="firstName" errorStyle="font-size: 0.9em; color: OrangeRed" />
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel value="Last Name:" for="lastName" class="form-label" />
+                    <h:inputText class="form-control" id="lastName"
+                        value="#{passengerManagedBean.passenger.lastName}" />
+                    <h:message class="form-text" for="lastName" errorStyle="font-size: 0.9em; color: OrangeRed" />
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel value="Mobile Phone:" for="mobilePhone" class="form-label" />
+                    <h:inputText class="form-control" id="mobilePhone"
+                        value="#{passengerManagedBean.passenger.mobilePhone}" />
+                    <h:message class="form-text" for="mobilePhone" errorStyle="font-size: 0.9em; color: OrangeRed" />
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel value="Email:" for="email" class="form-label" />
+                    <h:inputText class="form-control" id="email" value="#{passengerManagedBean.passenger.email}" />
+                    <h:message class="form-text" for="email" errorStyle="font-size: 0.9em; color: OrangeRed" />
+                </div>
+                <br />
+                <div class="d-grid gap-2 d-md-block">
+                    <h:panelGroup layout="block" rendered="#{passengerManagedBean.status == null}">
+                        <h:commandButton value="Discard Changes" action="passengerInput" immediate="true"
+                            class="btn btn-primary me-md-2" />
+                    </h:panelGroup>
+                    <h:commandButton value="Save" action="#{passengerManagedBean.save}"
+                        class="btn btn-success me-md-2" />
+                    <h:commandButton value="Back" action="#{passengerManagedBean.prepareList}" immediate="true"
+                        class="btn btn-secondary" />
+                </div>
+
+                <br /><br />
+                <div class="messagecolor">
+                    <h:messages infoClass="alert alert-success" errorClass="alert alert-danger" showSummary="true"
+                        showDetail="false" errorStyle="color: #d20005" infoStyle="color: green" />
+                </div>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
+</html>

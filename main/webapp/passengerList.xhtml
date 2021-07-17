@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+    <ui:composition template="./resources/template.xhtml">
+
+        <ui:define name="title">TH Holiday - Passenger</ui:define>
+
+        <ui:define name="body">
+            <h:form>
+                <h:commandButton class="btn btn-secondary" value="Add Passenger"
+                    action="#{passengerManagedBean.prepareAdd}" />
+
+                <br /><br />
+                <h:messages infoClass="alert alert-success" errorClass="alert alert-danger" errorStyle="color: #d20005"
+                    warnStyle="color: Tomato;" infoStyle="color: green; border: 1px solid LightSteelBlue" layout="list"
+                    styleClass="face_msg" />
+
+                <br />
+                <h:dataTable value="#{passengerManagedBean.rows}" var="passenger"
+                    class="table table-hover table-striped" headerClass="table-primary">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{passenger.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        #{passenger.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">First Name</f:facet>
+                        #{passenger.firstName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Last Name</f:facet>
+                        #{passenger.lastName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Mobile phone</f:facet>
+                        #{passenger.mobilePhone}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email address</f:facet>
+                        #{passenger.email}
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="View" action="#{passengerManagedBean.prepareDetail}"
+                            styleClass="row_button" class="btn btn-secondary me-md-2" />
+                        <h:commandButton value="Edit" action="#{passengerManagedBean.prepareEdit}"
+                            styleClass="row_button" class="btn btn-secondary me-md-2" />
+                        <h:commandButton value="Delete" action="#{passengerManagedBean.prepareDelete}"
+                            styleClass="row_button" class="btn btn-secondary me-md-2" />
+                        <h:commandButton value="Add to Trip" actionListener='#{passengerManagedBean.prepareJoinTrip}'
+                            action="#{tripManagedBean.prepareJoinTrip}" rendered="#{passenger.trip == null}"
+                            styleClass="row_button" class="btn btn-secondary" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
+</html>

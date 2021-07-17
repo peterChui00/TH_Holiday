@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>
+        <ui:insert name="title"></ui:insert>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CSS -->
+    <h:outputStylesheet name="/css/default.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
+</h:head>
+
+<h:body>
+
+    <div id="top" class="top">
+        <ui:insert name="top">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <h:form class="container-fluid">
+                    <h:commandLink class="navbar-brand" value="TH Holiday" action="#{paymentWarningBean.prepareWarning}"
+                        immediate="true" />
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Home"
+                                    action="#{paymentWarningBean.prepareWarning}" immediate="true" />
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Passenger"
+                                    action="#{passengerManagedBean.prepareList}" immediate="true" />
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Trip" action="#{tripManagedBean.prepareList}"
+                                    immediate="true" />
+                            </li>
+                        </ul>
+                    </div>
+
+                </h:form>
+            </nav>
+        </ui:insert>
+    </div>
+
+    <div id="body">
+        <ui:insert name="body"></ui:insert>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+</h:body>
+
+</html>
